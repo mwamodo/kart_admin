@@ -1,19 +1,18 @@
 <?php
-//stores
-Route::group(['prefix' => 'stores',
-	'namespace'=>'stores',
-	'middleware'=>['jwt.auth']
-], function () {
 
-    Route::get('/{slug}', 'StoreBuyerController@show');//check
+use Illuminate\Support\Facades\Route;
+
+//stores
+Route::group(['prefix' => 'stores', 'namespace'=>'stores', 'middleware'=>['jwt.auth']], function () {
+    Route::get('/{slug}', 'StoreBuyerController@show'); //check
     Route::post('addstores', 'StoreController@store');
     Route::get('editstores/{storeid}', 'StoreController@edit');
     Route::post('editstores/{storeid}', 'StoreController@update');
     Route::get('deletestores/{storeid}', 'StoreController@destroy');
-    Route::get('show/mystores', 'StoreController@mystores');//seller
+    Route::get('show/mystores', 'StoreController@mystores'); //seller
     
-   Route::get('searchstores', 'StoreController@searchstores');
-   Route::post('searchstores', 'StoreController@searchstores');
+    Route::get('searchstores', 'StoreController@searchstores');
+    Route::post('searchstores', 'StoreController@searchstores');
 
 });
 
@@ -26,103 +25,70 @@ Route::get('activestores', 'stores\StoreBuyerController@activestores');//buyer
 
 Route::get('store/product/brandfilter', 'stores\StoreBuyerController@brandFilter');//buyer
 
+Route::group(['prefix' => 'products', 'namespace'=>'Products', 'middleware'=>['jwt.auth']], function () {
+    Route::get('getmyproducts', 'ProductController@myproducts');
+    Route::get('displayproducts', 'ProductController@show');
+    Route::get('getproductdetail/{slug}/{userid}', 'ProductCategoryController@showproductdetail');
 
-Route::group(['prefix' => 'products',
-	         'namespace'=>'Products',
-		       'middleware'=>['jwt.auth']
-], function () {
-  Route::get('getmyproducts', 'ProductController@myproducts');
-			Route::get('displayproducts', 'ProductController@show');
-			Route::get('getproductdetail/{slug}/{userid}', 'ProductCategoryController@showproductdetail');
+    Route::post('addproducts', 'ProductAttributeStoreController@store');
+    Route::post('addproductAttribute', 'ProductController@storeproductAttributeAdd');
 
-			Route::post('addproducts', 'ProductAttributeStoreController@store');
+    Route::get('editproducts/{productid}', 'ProductAttributeStoreController@edit');
+    Route::post('editproducts/{productid}', 'ProductAttributeStoreController@update');
+    Route::get('deleteproducts/{productid}', 'ProductController@destroy');
+    Route::get('deleteproductimage/{id}/{productid}', 'ProductFeatureController@delete_getProductGallery');
 
-			Route::post('addproductAttribute', 'ProductController@storeproductAttributeAdd');
- 
-			Route::get('editproducts/{productid}', 'ProductAttributeStoreController@edit');
- 
+    Route::get('displayattributeproduct/{productid}', 'ProductVariationController@getAttributeProduct');
+    Route::get('productvariationlist/{productid}', 'ProductVariationController@getProductVariation');
 
-			Route::post('editproducts/{productid}', 'ProductAttributeStoreController@update');
+    Route::post('productcategory', 'ProductCategoryController@getProductCategory'); //seller
+    Route::post('productcategorysearch', 'ProductCategoryController@searchproduct');//seller
 
-			Route::get('deleteproducts/{productid}', 'ProductController@destroy');
-
-			Route::get('deleteproductimage/{id}/{productid}', 'ProductFeatureController@delete_getProductGallery');
-
-			
-			Route::get('displayattributeproduct/{productid}', 'ProductVariationController@getAttributeProduct');
-			Route::get('productvariationlist/{productid}', 'ProductVariationController@getProductVariation');
-
-      Route::post('productcategory', 'ProductCategoryController@getProductCategory'); //seller
-      Route::post('productcategorysearch', 'ProductCategoryController@searchproduct');//seller
-
-      Route::post('searchproduct', 'ProductSearchController@searchproductdetail');//seller
-            // Route::get('featuredproducts', 'ProductFeatureController@featuredproduct');
+    Route::post('searchproduct', 'ProductSearchController@searchproductdetail');//seller
+    // Route::get('featuredproducts', 'ProductFeatureController@featuredproduct');
 
 
-//wishlist
- 
-//  Route::get('/getmywishlist', 'WishListController@getwishlist');
-//  Route::post('/addwishlist', 'WishListController@store');
+    //wishlist
+
+    //  Route::get('/getmywishlist', 'WishListController@getwishlist');
+    //  Route::post('/addwishlist', 'WishListController@store');
 
 
-// Route::get('/wishlist/{id}/remove', 'WishListController@destroy');
-// Route::post('/wishlist/rename', 'WishListController@update');
+    // Route::get('/wishlist/{id}/remove', 'WishListController@destroy');
+    // Route::post('/wishlist/rename', 'WishListController@update');
 
-// Route::post('/wishitem/add', 'WishListItemController@store');
-// Route::post('/wishlistitem/move', 'WishListItemController@move');
-// Route::get('/getmywishlistitem',     'WishListItemController@index');
-// Route::get('/wishlistitem/{id}/remove',     'WishListItemController@destroy');
-
-
+    // Route::post('/wishitem/add', 'WishListItemController@store');
+    // Route::post('/wishlistitem/move', 'WishListItemController@move');
+    // Route::get('/getmywishlistitem',     'WishListItemController@index');
+    // Route::get('/wishlistitem/{id}/remove',     'WishListItemController@destroy');
 });
 
- Route::get('featuredproducts', 'Products\ProductFeatureController@featuredproduct');
-Route::group([
-           'namespace'=>'Products',
-         'middleware'=>['jwt.auth']
-], function () {
-  Route::get('getauthname','ProductController@getAuthName');
+Route::get('featuredproducts', 'Products\ProductFeatureController@featuredproduct');
+Route::group(['namespace'=>'Products', 'middleware'=>['jwt.auth']], function () {
+    Route::get('getauthname','ProductController@getAuthName');
 });
 
-
-
-
-Route::group(['prefix' => 'products',
-           'namespace'=>'Products',
-        
-], function () {
-      Route::get('pricefilter/{min}/{max}', 'ProductSearchController@searchPrice');
-
-     Route::get('category/pricefilter/{min}/{max}', 'ProductSearchController@categoryPriceSearch');
-
-      Route::get('searchbrand/{searchbrand}', 'ProductSearchController@searchBrand');
-     Route::get('pricelow/pricefilter', 'ProductSearchController@getlowpricefilter');
-     Route::get('pricehigh/pricefilter', 'ProductSearchController@highpricefilter');
-     Route::get('source', 'ProductSourceController@uploads');
-
-    
-  });
+Route::group(['prefix' => 'products', 'namespace'=>'Products',], function () {
+    Route::get('pricefilter/{min}/{max}', 'ProductSearchController@searchPrice');
+    Route::get('category/pricefilter/{min}/{max}', 'ProductSearchController@categoryPriceSearch');
+    Route::get('searchbrand/{searchbrand}', 'ProductSearchController@searchBrand');
+    Route::get('pricelow/pricefilter', 'ProductSearchController@getlowpricefilter');
+    Route::get('pricehigh/pricefilter', 'ProductSearchController@highpricefilter');
+    Route::get('source', 'ProductSourceController@uploads');
+});
    
-   Route::get('brands', 'Categories\BrandController@index');
-   Route::get('getbrands', 'Categories\BrandController@getBrands');
-   Route::get('store/product/brands', 'Categories\BrandController@getStoreBrand');
-   Route::get('category/brands', 'Categories\BrandController@getcategoryBrand');
-   Route::get('category/products/{brand}', 'Products\ProductSearchController@categoryProductBrandFilter'); 
+Route::get('brands', 'Categories\BrandController@index');
+Route::get('getbrands', 'Categories\BrandController@getBrands');
+Route::get('store/product/brands', 'Categories\BrandController@getStoreBrand');
+Route::get('category/brands', 'Categories\BrandController@getcategoryBrand');
+Route::get('category/products/{brand}', 'Products\ProductSearchController@categoryProductBrandFilter');
 
+Route::get('/seller/product/{param}/{userid}/getqusandans/{paginate}', 'Seller\QuestionAnswerController@getqusandans');
 
-  Route::get('/seller/product/{param}/{userid}/getqusandans/{paginate}', 'Seller\QuestionAnswerController@getqusandans');
- 
-  Route::get('products/ratingfilter/{rating}', 'Products\ProductSearchController@ratingfilter');
-  Route::get('products/category/ratingfilter/{rating}', 'Products\ProductSearchController@categoryProductRatingFilter');
-     
+Route::get('products/ratingfilter/{rating}', 'Products\ProductSearchController@ratingfilter');
+Route::get('products/category/ratingfilter/{rating}', 'Products\ProductSearchController@categoryProductRatingFilter');
 
-
-
-Route::group(['prefix' => 'seller',
-	         'namespace'=>'Seller',
-		      'middleware'=>['jwt.auth']
-], function () {
-    
+Route::group(['prefix' => 'seller', 'namespace'=>'Seller', 'middleware'=>['jwt.auth']], function () {
     Route::get('/products', 'DashboardController@productcount');
     Route::get('/stores', 'DashboardController@storecount');
     Route::get('/orders', 'DashboardController@ordercount');
@@ -160,7 +126,6 @@ Route::group(['prefix' => 'seller',
     Route::get('deleteattributesetcategory/{id}', 'AttributesetCategoryController@destroy');
     Route::post('searchattributesetcategory', 'AttributesetCategoryController@searchattributesetcategory');
 
-
      //attributeset
     Route::get('displayattributeset', 'AttributesetController@displayattributeset');
     Route::post('searchattributeset', 'AttributesetController@searchattributeset');
@@ -179,58 +144,34 @@ Route::group(['prefix' => 'seller',
     Route::get('editanswer/{id}', 'QuestionAnswerController@edit');
     Route::post('updateanswer/{id}', 'QuestionAnswerController@updateanswer');
     Route::get('deleteanswer/{id}', 'QuestionAnswerController@destroy');
+});
 
-   
-   });
-
-Route::group(['prefix' => 'seller',
-           'namespace'=>'Seller',
-], function () {
+Route::group(['prefix' => 'seller', 'namespace'=>'Seller',], function () {
    Route::post('storesellerregistration', 'SellerProfileController@store');
-
 });
 
-Route::group(['prefix'=>'attributes',
-               'namespace'=>'Attributes',
-               'middleware'=>['jwt.auth']
- ],function(){
-   Route::post('attributeproductstore/{count}', 'AttributesetController@store');//seller
-  Route::post('updateattributeproduct', 'AttributesetController@update');//seller
- });
+Route::group(['prefix'=>'attributes', 'namespace'=>'Attributes', 'middleware'=>['jwt.auth']], function(){
+    Route::post('attributeproductstore/{count}', 'AttributesetController@store');//seller
+    Route::post('updateattributeproduct', 'AttributesetController@update');//seller
+});
 
-// Route::group([ 
-                 
-//                 'namespace'=>'Products',
-//               'middleware'=>['jwt.auth'],   
-// ], function () {
-//   Route::get('price', 'ProductSearchController@searchPrice');
-           
+// Route::group(['namespace'=>'Products','middleware'=>['jwt.auth'],], function () {
+//     Route::get('price', 'ProductSearchController@searchPrice');
 // });
-Route::group([ 
-                'prefix' => 'wishlist',
-                'namespace'=>'Products',
-              'middleware'=>['jwt.auth'],   
-], function () {
-  
-Route::post('rename', 'WishListController@update');
-Route::post('/addwishlist', 'WishListController@store');
-Route::get('getmywishlist', 'WishListController@getwishlist');
-Route::get('/{id}/remove', 'WishListController@destroy');
-Route::post('wishitem/add', 'WishListItemController@store');
-Route::post('wishlistitem/move', 'WishListItemController@move');
-Route::get('getmywishlistitem',     'WishListItemController@index');
-Route::get('filterproduct/{sortby}',     'WishListItemController@getlowpriceproduct');
-Route::get('/wishlistitem/{id}/remove',     'WishListItemController@destroy');
 
-});
-Route::group([  'prefix'=>'settings',
-                'namespace'=>'Settings',
-              'middleware'=>['jwt.auth']
-], function () {
-
-   Route::post('profileimage/update', 'SettingsController@store');
-   Route::get('/getactivelog', 'SettingsController@getActiveLog');
-
-
+Route::group([ 'prefix' => 'wishlist', 'namespace'=>'Products', 'middleware'=>['jwt.auth'],], function () {
+    Route::post('rename', 'WishListController@update');
+    Route::post('/addwishlist', 'WishListController@store');
+    Route::get('getmywishlist', 'WishListController@getwishlist');
+    Route::get('/{id}/remove', 'WishListController@destroy');
+    Route::post('wishitem/add', 'WishListItemController@store');
+    Route::post('wishlistitem/move', 'WishListItemController@move');
+    Route::get('getmywishlistitem',     'WishListItemController@index');
+    Route::get('filterproduct/{sortby}',     'WishListItemController@getlowpriceproduct');
+    Route::get('/wishlistitem/{id}/remove',     'WishListItemController@destroy');
 });
 
+Route::group([ 'prefix'=>'settings','namespace'=>'Settings','middleware'=>['jwt.auth']], function () {
+    Route::post('profileimage/update', 'SettingsController@store');
+    Route::get('/getactivelog', 'SettingsController@getActiveLog');
+});

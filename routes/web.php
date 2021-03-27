@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 // Route::group([
 //     'prefix' => 'auth',
 //     'middleware' => ['auth','user'],
@@ -14,31 +16,22 @@
 
 //Auth::routes(['verify' => true]);
 
- Route::get('region', 'Settings\RegionController@getvalue');
+
+Route::get('region', 'Settings\RegionController@getvalue');
  
 Route::get('emailverify/{token}', 'Auth\RegisterController@verifyUser');
 
-
-
-   Route::group(['middleware' => ['guest'] ], function () {
-      Route::get('/','Admin\LoginController@create')->name('login');
-    
-      Route::post('/','Admin\LoginController@login');
-      Route::get('/forgetpassword','Admin\ForgetPasswordController@create');
-      Route::post('/forgetpassword','Admin\ForgetPasswordController@store');
-
-      Route::get('/forgetverify/{token}', 'Admin\ForgetPasswordController@verify');
-      
-   });
-
-
-   Route::group(['middleware' => ['auth'] ], function () {
-   
-   Route::get('logout', 'Admin\LoginController@logout');
-
-  
+Route::group(['middleware' => ['guest'] ], function () {
+  Route::get('/','Admin\LoginController@create')->name('login');
+  Route::post('/','Admin\LoginController@login');
+  Route::get('/forgetpassword','Admin\ForgetPasswordController@create');
+  Route::post('/forgetpassword','Admin\ForgetPasswordController@store');
+  Route::get('/forgetverify/{token}', 'Admin\ForgetPasswordController@verify');
 });
 
+Route::group(['middleware' => ['auth'] ], function () {
+   Route::get('logout', 'Admin\LoginController@logout');
+});
 
 Route::group(['middleware'=>['auth','admin1'],'prefix'=>'admin','namespace'=>'Admin'],function(){
     Route::get('/dashboard','DashboardController@index');
@@ -47,11 +40,7 @@ Route::group(['middleware'=>['auth','admin1'],'prefix'=>'admin','namespace'=>'Ad
     Route::get('/dashboard/getseller','DashboardController@getSeller'); 
 });
 
-
-
-Route::group(['middleware'=>['auth','admin1'],'prefix'=>'admin','namespace'=>'Admin\Buyer'],function(){
-
-
+Route::group(['middleware'=>['auth','admin1'],'prefix'=>'admin','namespace'=>'Admin\Buyer'],function() {
   Route::get('/buyer/{id}/addresses', 'AddressController@index'); 
   Route::get('/buyer/{userid}/address/{id}/edit', 'AddressController@edit'); 
   Route::post('/buyer/{userid}/address/{id}/edit', 'AddressController@update');
@@ -91,17 +80,8 @@ Route::group(['middleware'=>['auth','admin1'],'prefix'=>'admin','namespace'=>'Ad
   // Route::get('/buyer/{id}/reviews', 'BuyerController@reviews');
   // Route::get('/buyer/{id}/getreview', 'BuyerController@getreview');
   // Route::get('/buyer/{id}/del_review', 'BuyerController@delReview');
-  // Route::post('/buyer/reviews/update', 'BuyerController@reviewUpdate'); 
-  
-
-
+  // Route::post('/buyer/reviews/update', 'BuyerController@reviewUpdate');
 });
-
-
-
-
-
-
 
 Route::group(['middleware'=>['auth','admin1'],'prefix'=>'admin','namespace'=>'Admin'],function(){
   Route::get('/changepassword', 'ChangePasswordController@create');
@@ -113,8 +93,6 @@ Route::group(['middleware'=>['auth','admin1'],'prefix'=>'admin','namespace'=>'Ad
 
 });
 
-
-
 Route::group(['middleware'=>['auth','admin1'],'prefix'=>'admin','namespace'=>'Admin\Order'],function(){
 
   Route::get('/order/{slug}', 'OrderController@create');
@@ -122,9 +100,8 @@ Route::group(['middleware'=>['auth','admin1'],'prefix'=>'admin','namespace'=>'Ad
 
   Route::post('/order/{id}/statusupdate', 'OrderController@update');
 
-
-
 });
+
 Route::group(['middleware'=>['auth','admin1'],'prefix'=>'admin','namespace'=>'Admin\GiftOrder'],function(){
   // Route::get('/transaction/pending', 'TransactionController@pending');
   // Route::get('/transaction/approve', 'TransactionController@approve');
@@ -136,28 +113,23 @@ Route::group(['middleware'=>['auth','admin1'],'prefix'=>'admin','namespace'=>'Ad
    Route::get('/giftorder/{id}/show', 'GiftOrderController@show');
    Route::post('/giftorder/getlist', 'GiftOrderController@create');
 });
- 
-
 
 Route::group(['middleware'=>['auth','admin1'],'prefix'=>'admin','namespace'=>'Admin\Seller'],function(){
- 
- // Route::get('/seller/getproduct/{id}', 'SellerController@getProduct');
+  // Route::get('/seller/getproduct/{id}', 'SellerController@getProduct');
   // Route::post('/seller/product/{id}/statusupdate', 'SellerController@productStatusUpdate');
-
   Route::post('/seller/product/{id}/statusupdate', 'ProductController@productStatusUpdate');
   Route::get('/seller/getproduct/{id}', 'ProductController@getProduct');
 
-
- Route::get('/seller/{id}/getsellerprofile', 'SellerController@getsellerprofile');
+  Route::get('/seller/{id}/getsellerprofile', 'SellerController@getsellerprofile');
   Route::post('/seller/{id}/update', 'SellerController@statusUpdate');
 
   Route::get('/seller/{id}/invoice/download', 'SellerController@pdfDownload');
   Route::get('/seller/address/{id}/delete', 'AddressController@destroy');
   Route::get('/seller/{id}/addresses', 'AddressController@index'); 
   Route::get('/seller/{userid}/address/{id}/edit', 'AddressController@edit'); 
- Route::post('/seller/{userid}/address/{id}/edit', 'AddressController@update');
+  Route::post('/seller/{userid}/address/{id}/edit', 'AddressController@update');
 
-   Route::post('/seller/delete', 'SellerController@destroy');
+  Route::post('/seller/delete', 'SellerController@destroy');
   Route::post('/seller/verify', 'SellerController@verifyCode');
 
   Route::get('/seller', 'SellerController@index');
@@ -166,8 +138,7 @@ Route::group(['middleware'=>['auth','admin1'],'prefix'=>'admin','namespace'=>'Ad
   Route::get('/seller/{id}/edit', 'SellerController@edit'); 
   Route::post('/seller/{id}/edit', 'SellerController@update'); 
 
-
-  Route::get('/seller/add', 'SellerController@create'); 
+  Route::get('/seller/add', 'SellerController@create');
   Route::post('/seller/add', 'SellerController@store');
   
   Route::get('/seller/{id}/orders', 'OrderController@orders');
@@ -182,14 +153,14 @@ Route::group(['middleware'=>['auth','admin1'],'prefix'=>'admin','namespace'=>'Ad
 
   // Route::get('/seller/{id}/del_store', 'SellerController@delStore');
 
-    Route::get('/seller/{id}/del_store', 'StoreController@delStore');
+  Route::get('/seller/{id}/del_store', 'StoreController@delStore');
 
   // Route::get('/seller/{id}/product', 'SellerController@product');
 
   Route::get('/seller/{id}/product', 'ProductController@product');
 
   // Route::get('/seller/{id}/del_product', 'SellerController@delProduct');
-    Route::get('/seller/{id}/del_product', 'ProductController@delProduct');
+  Route::get('/seller/{id}/del_product', 'ProductController@delProduct');
   
   Route::post('/seller/resetpassword', 'ResetPasswordController@resetpassword');
 
@@ -202,7 +173,6 @@ Route::group(['middleware'=>['auth','admin1'],'prefix'=>'admin','namespace'=>'Ad
  
   Route::get('/getproduct/{id}', 'ProductController@getProduct');
   Route::post('/product/{id}/statusupdate', 'ProductController@statusUpdate');
-
 
   Route::get('/product/pending', 'ProductController@pending');
   Route::get('/product/approve', 'ProductController@approve');
@@ -240,66 +210,56 @@ Route::group(['middleware'=>['auth','admin1'],'prefix'=>'admin','namespace'=>'Ad
 });
 
 Route::group(['middleware'=>['auth','admin1'],'prefix'=>'admin','namespace'=>'Admin\Setting'],function(){
-Route::get('/setting', 'SettingController@index');
-Route::get('/setting/{id}/edit', 'SettingController@edit');
-Route::post('/setting/{id}/edit', 'SettingController@update');
-// Route::get('/setting/add', 'SettingController@create');
-// Route::post('/setting/add', 'SettingController@store');
-Route::get('/setting/{id}/delete', 'SettingController@destroy');
+    Route::get('/setting', 'SettingController@index');
+    Route::get('/setting/{id}/edit', 'SettingController@edit');
+    Route::post('/setting/{id}/edit', 'SettingController@update');
+    // Route::get('/setting/add', 'SettingController@create');
+    // Route::post('/setting/add', 'SettingController@store');
+    Route::get('/setting/{id}/delete', 'SettingController@destroy');
+});
 
+Route::group(['middleware'=>['auth','admin1'], 'prefix'=>'admin', 'namespace'=>'Admin\ShippingMethod'],function(){
+
+    Route::get('/shippingmethod','ShippingMethodController@index');
+    Route::get('/shippingmethod/add', 'ShippingMethodController@create');
+    Route::post('/shippingmethod/add', 'ShippingMethodController@store');
+    Route::get('/shippingmethod/{id}/edit', 'ShippingMethodController@edit');
+    Route::post('/shippingmethod/{id}/edit', 'ShippingMethodController@update');
+    Route::get('/shippingmethod/{id}/delete', 'ShippingMethodController@destroy');
+
+    Route::get('/countryshippingmethod','CountryShippingMethodController@index');
+    Route::get('/countryshippingmethod/{id}/attach','CountryShippingMethodController@create');
+    Route::post('/countryshippingmethod/{id}/attach','CountryShippingMethodController@store');
+    //  Route::get('/countryshippingmethod/add', 'CountryShippingMethodController@create');
+    // Route::post('/countryshippingmethod/add', 'CountryShippingMethodController@store');
+    // Route::get('/countryshippingmethod/{id}/edit', 'CountryShippingMethodController@edit');
+    // Route::post('/countryshippingmethod/{id}/edit', 'CountryShippingMethodController@update');
+    // Route::get('/countryshippingmethod/{id}/delete', 'CountryShippingMethodController@destroy');
 
 });
 
-Route::group(['middleware'=>['auth','admin1'],
-              'prefix'=>'admin',
-              'namespace'=>'Admin\ShippingMethod'],function(){
+Route::group(['middleware'=>['auth','admin1'], 'prefix'=>'admin', 'namespace'=>'Admin\PaymentMethod'],function(){
+    Route::get('/paymentmethod','PaymentMethodController@index');
+    Route::get('/paymentmethod/add', 'PaymentMethodController@create');
+    Route::post('/paymentmethod/add', 'PaymentMethodController@store');
+    Route::get('/paymentmethod/{id}/edit', 'PaymentMethodController@edit');
+    Route::post('/paymentmethod/{id}/edit', 'PaymentMethodController@update');
+    Route::get('/paymentmethod/{id}/delete', 'PaymentMethodController@destroy');
+    // Route::get('/countrypaymentmethod','CountryPaymentMethodController@index');
+    // Route::get('/countrypaymentmethod/{id}/attach','CountryPaymentMethodController@create');
+    // Route::post('/countrypaymentmethod/{id}/attach','CountryPaymentMethodController@store');
 
-Route::get('/shippingmethod','ShippingMethodController@index');
-Route::get('/shippingmethod/add', 'ShippingMethodController@create'); 
-Route::post('/shippingmethod/add', 'ShippingMethodController@store');
-Route::get('/shippingmethod/{id}/edit', 'ShippingMethodController@edit');
-Route::post('/shippingmethod/{id}/edit', 'ShippingMethodController@update');
-Route::get('/shippingmethod/{id}/delete', 'ShippingMethodController@destroy');
-
- Route::get('/countryshippingmethod','CountryShippingMethodController@index');
- Route::get('/countryshippingmethod/{id}/attach','CountryShippingMethodController@create');
- Route::post('/countryshippingmethod/{id}/attach','CountryShippingMethodController@store');
-//  Route::get('/countryshippingmethod/add', 'CountryShippingMethodController@create'); 
-// Route::post('/countryshippingmethod/add', 'CountryShippingMethodController@store');
-// Route::get('/countryshippingmethod/{id}/edit', 'CountryShippingMethodController@edit');
-// Route::post('/countryshippingmethod/{id}/edit', 'CountryShippingMethodController@update');
-// Route::get('/countryshippingmethod/{id}/delete', 'CountryShippingMethodController@destroy');
-
+    //  Route::get('/countryshippingmethod/add', 'CountryShippingMethodController@create');
+    // Route::post('/countryshippingmethod/add', 'CountryShippingMethodController@store');
+    // Route::get('/countryshippingmethod/{id}/edit', 'CountryShippingMethodController@edit');
+    // Route::post('/countryshippingmethod/{id}/edit', 'CountryShippingMethodController@update');
+    // Route::get('/countryshippingmethod/{id}/delete', 'CountryShippingMethodController@destroy');
 });
-
-Route::group(['middleware'=>['auth','admin1'],
-              'prefix'=>'admin',
-              'namespace'=>'Admin\PaymentMethod'],function(){
- Route::get('/paymentmethod','PaymentMethodController@index');
- Route::get('/paymentmethod/add', 'PaymentMethodController@create'); 
-Route::post('/paymentmethod/add', 'PaymentMethodController@store');
-Route::get('/paymentmethod/{id}/edit', 'PaymentMethodController@edit');
-Route::post('/paymentmethod/{id}/edit', 'PaymentMethodController@update');
-Route::get('/paymentmethod/{id}/delete', 'PaymentMethodController@destroy');
- // Route::get('/countrypaymentmethod','CountryPaymentMethodController@index');
- // Route::get('/countrypaymentmethod/{id}/attach','CountryPaymentMethodController@create');
- // Route::post('/countrypaymentmethod/{id}/attach','CountryPaymentMethodController@store');
-
-//  Route::get('/countryshippingmethod/add', 'CountryShippingMethodController@create'); 
-// Route::post('/countryshippingmethod/add', 'CountryShippingMethodController@store');
-// Route::get('/countryshippingmethod/{id}/edit', 'CountryShippingMethodController@edit');
-// Route::post('/countryshippingmethod/{id}/edit', 'CountryShippingMethodController@update');
-// Route::get('/countryshippingmethod/{id}/delete', 'CountryShippingMethodController@destroy');
-
-});
-
 
 Route::group(['middleware'=>['auth','admin1'],'prefix'=>'admin','namespace'=>'Admin\Review'],function(){
-
   Route::post('/reviews/edit', 'ReviewController@reviewUpdate'); 
   Route::get('/review/{id}/delete', 'ReviewController@delReview');
   Route::get('/reviews', 'ReviewController@reviews');
-
-
 });
+
 Route::get('/home', 'HomeController@index')->name('home');
