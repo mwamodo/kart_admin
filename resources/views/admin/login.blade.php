@@ -4,7 +4,9 @@
      <div class="w-full lg:w-1/3 mx-auto bg-white  login-form rounded px-5 py-4 my-10">
      <div class="mx-5">
      	<div class="py-4">
-     		<a href="#"><img src="images/gegocart-logo.png" class="h-10 mx-auto"></a>
+     		<a href="#">
+{{--				<img src="images/gegocart-logo.png" class="h-10 mx-auto">--}}
+			</a>
      	</div>
      	<div class="">
                <form method="post" action="{{url('/')}}">
@@ -34,7 +36,7 @@
      			</div>
      			<div class="py-4">
      			<div class="flex items-center justify-between">
-     				<a href="{{url('/forgetpassword')}}" class="text-2xl lg:text-xs">Forget Password ?</a>
+     				<a href="{{ route('forget-password') }}" class="text-2xl lg:text-xs">Forget Password ?</a>
      			</div>
      			</div>
      			<div class="pt-3">

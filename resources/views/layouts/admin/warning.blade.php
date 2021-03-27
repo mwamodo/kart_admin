@@ -1,25 +1,22 @@
 @push('scripts')
+    <script>
+        swal({
+            text: "Do you want to delete for this?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
 
-<script>
-  swal({
- 
-  text: "Do you want to delete for this?",
-  icon: "warning",
-  buttons: true,
-  dangerMode: true,
-})
-.then((willDelete) => {
-  if (willDelete) {
+                    swal("Success", {
+                        icon: "success",
+                    });
 
-    swal("Success", {
-                   
-      icon: "success",
-    });
+                } else {
+                    swal("Your action is cancel!");
+                }
+            });
 
-  } else {
-    swal("Your action is cancel!");
-  }
-});
-
-</script>
+    </script>
 @endpush

@@ -12,5 +12,13 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+    .sass('resources/assets/sass/app.scss', 'public/css')
+    .postCss('resources/assets/css/tailwind.css', 'public/css', [
+        require('postcss-import'),
+        require('tailwindcss')
+    ]);
 
+// TODO: maybe needs an upgrade
+// if (mix.inProduction()) {
+//     mix.version();
+// }
