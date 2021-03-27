@@ -14,19 +14,18 @@ use Illuminate\Support\Facades\Route;
 });
 */
 
-//Auth::routes(['verify' => true]);
+// Auth::routes(['verify' => true]);
 
-
-Route::get('region', 'Settings\RegionController@getvalue');
+Route::get('region', 'Settings\RegionController@index');
  
 Route::get('emailverify/{token}', 'Auth\RegisterController@verifyUser');
 
 Route::group(['middleware' => ['guest'] ], function () {
-  Route::get('/','Admin\LoginController@create')->name('login');
-  Route::post('/','Admin\LoginController@login');
-  Route::get('/forgetpassword','Admin\ForgetPasswordController@create');
-  Route::post('/forgetpassword','Admin\ForgetPasswordController@store');
-  Route::get('/forgetverify/{token}', 'Admin\ForgetPasswordController@verify');
+    Route::get('/','Admin\LoginController@create')->name('login');
+    Route::post('/','Admin\LoginController@login');
+    Route::get('/forgetpassword','Admin\ForgetPasswordController@create');
+    Route::post('/forgetpassword','Admin\ForgetPasswordController@store');
+    Route::get('/forgetverify/{token}', 'Admin\ForgetPasswordController@verify');
 });
 
 Route::group(['middleware' => ['auth'] ], function () {
