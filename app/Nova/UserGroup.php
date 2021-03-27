@@ -9,7 +9,7 @@ use Laravel\Nova\Fields\Boolean;
 use Illuminate\Http\Request;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Usergroup extends Resource
+class UserGroup extends Resource
 {
     /**
      * The model the resource corresponds to.
