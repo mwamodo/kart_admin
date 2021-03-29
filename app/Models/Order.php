@@ -12,7 +12,11 @@ use Illuminate\Database\Eloquent\Model;
 use NumberFormatter;
 use App\Models\OrderItem;
 use Illuminate\Database\Eloquent\SoftDeletes;
- 
+
+/**
+ * @method static where(string $string, string $string1, string $last_date)
+ * @method static whereBetween(string $string, array $array)
+ */
 class Order extends Model
 {
     use SoftDeletes;

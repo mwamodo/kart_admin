@@ -11,7 +11,10 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;
 use Cache;
-  
+
+/**
+ * @method static ByUserType(int $int)
+ */
 class User extends Authenticatable implements JWTSubject,MustVerifyEmail
 {
     use Notifiable,SoftDeletes;

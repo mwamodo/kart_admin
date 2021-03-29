@@ -22,7 +22,7 @@ Route::group(['middleware' => ['auth'] ], function () {
    Route::get('logout', function() {
        Auth::logout();
        return redirect()->route('login');
-   });
+   })->name('logout');
 });
 
 Route::group(['middleware'=>['auth','admin1'], 'prefix'=>'admin', 'namespace'=>'Admin'],function(){
