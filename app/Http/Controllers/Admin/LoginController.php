@@ -21,7 +21,7 @@ class LoginController extends Controller
 
 //    public function login(Request $request)
 //    {
-//        // dd('1');
+//         dd('1');
 //        $user = User::where('email',$request->email)->first();
 //
 //        if ($user->usergroup_id == 1) {

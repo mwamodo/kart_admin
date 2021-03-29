@@ -22,9 +22,11 @@ Route::get('region', 'Settings\RegionController@index')->name('region');
 Route::get('email-verify/{token}', 'Auth\RegisterController@verifyUser')->name('email-verify');
 
 Route::group(['middleware' => ['guest'] ], function () {
-    Route::get('/','Admin\LoginController@create')->name('login');
+    Route::get('/','Admin\LoginController@create')
+        ->name('login');
     Route::post('/','Admin\LoginController@login');
-    Route::get('/forget-password','Admin\ForgetPasswordController@create')->name('forget-password');
+    Route::get('/forget-password','Admin\ForgetPasswordController@create')
+        ->name('forget-password');
     Route::post('/forgetpassword','Admin\ForgetPasswordController@store');
     Route::get('/forgetverify/{token}', 'Admin\ForgetPasswordController@verify');
 });
