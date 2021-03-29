@@ -1,51 +1,51 @@
-<div class="hidden w-28 bg-indigo-700 overflow-y-auto md:block">
+<div class="hidden w-28 bg-gray-700 overflow-y-auto md:block">
     <div class="w-full py-6 flex flex-col items-center">
         <div class="flex-shrink-0 flex items-center">
             <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark.svg?color=white"
                  alt="Kart">
         </div>
         <div class="flex-1 mt-6 w-full px-2 space-y-1">
-            <!-- Current: "bg-indigo-800 text-white", Default: "group text-indigo-100 hover:bg-indigo-800 hover:text-white" -->
+            <!-- Current: "bg-gray-800 text-white", Default: "group text-gray-100 hover:bg-gray-800 hover:text-white" -->
             <a href="#"
-               class="bg-indigo-800 text-white w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+               class="bg-gray-800 text-white w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
                aria-current="page">
-                <!-- Current: "text-white", Default: "text-indigo-300 group-hover:text-white" -->
+                <!-- Current: "text-white", Default: "text-gray-300 group-hover:text-white" -->
                 <x-icon.home class="h-6 w-6" />
                 <span class="mt-2">Home</span>
             </a>
 
             <a href="#"
-               class="group text-indigo-100 hover:bg-indigo-800 hover:text-white w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+               class="group text-gray-100 hover:bg-gray-800 hover:text-white w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
                aria-current="page">
-                <x-icon.sellers class="text-indigo-300 group-hover:text-white h-6 w-6" />
+                <x-icon.sellers class="text-gray-300 group-hover:text-white h-6 w-6" />
                 <span class="mt-2">Sellers</span>
             </a>
 
             <a href="#"
-               class="group text-indigo-100 hover:bg-indigo-800 hover:text-white w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+               class="group text-gray-100 hover:bg-gray-800 hover:text-white w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
                aria-current="page">
-                <x-icon.product class="text-indigo-300 group-hover:text-white h-6 w-6"/>
+                <x-icon.product class="text-gray-300 group-hover:text-white h-6 w-6"/>
                 <span class="mt-2">Products</span>
             </a>
 
             <a href="#"
-               class="group text-indigo-100 hover:bg-indigo-800 hover:text-white w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+               class="group text-gray-100 hover:bg-gray-800 hover:text-white w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
                aria-current="page">
-                <x-icon.buyers class="text-indigo-300 group-hover:text-white h-6 w-6" />
+                <x-icon.buyers class="text-gray-300 group-hover:text-white h-6 w-6" />
                 <span class="mt-2">Buyers</span>
             </a>
 
             <a href="#"
-               class="group text-indigo-100 hover:bg-indigo-800 hover:text-white w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+               class="group text-gray-100 hover:bg-gray-800 hover:text-white w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
                aria-current="page">
-                <x-icon.orders class="text-indigo-300 group-hover:text-white h-6 w-6" />
+                <x-icon.orders class="text-gray-300 group-hover:text-white h-6 w-6" />
                 <span class="mt-2">Orders</span>
             </a>
 
             <a href="#"
-               class="group text-indigo-100 hover:bg-indigo-800 hover:text-white w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+               class="group text-gray-100 hover:bg-gray-800 hover:text-white w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
                aria-current="page">
-                <x-icon.settings class="text-indigo-300 group-hover:text-white h-6 w-6" />
+                <x-icon.settings class="text-gray-300 group-hover:text-white h-6 w-6" />
                 <span class="mt-2">Settings</span>
             </a>
 
