@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ env('APP_NAME', 'Kart By CodeKite') }}</title>
     <link rel="stylesheet" href="{{ mix('css/kart.css') }}">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
     @livewireStyles
 </head>
 <body class="font-sans">

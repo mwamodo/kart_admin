@@ -3,13 +3,14 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+// TODO: check the region in details
 Route::get('region', 'Settings\RegionController@index')->name('region');
 
 // TODO: email-verify process
 Route::get('email-verify/{token}', 'Auth\RegisterController@verifyUser')->name('email-verify');
 
 Route::group(['middleware' => ['guest'] ], function () {
-    Route::view('/', 'kart/admin/login')->name('login');
+    Route::view('/', 'kart/auth/login')->name('login');
 
     // TODO: forget-password process
     Route::get('/forget-password','Admin\ForgetPasswordController@create')->name('forget-password');
@@ -24,8 +25,10 @@ Route::group(['middleware' => ['auth'] ], function () {
    });
 });
 
-Route::group(['middleware'=>['auth','admin1'],'prefix'=>'admin','namespace'=>'Admin'],function(){
+Route::group(['middleware'=>['auth','admin1'], 'prefix'=>'admin', 'namespace'=>'Admin'],function(){
+    Route::view('kart/dashboard/','kart/dashboard/index')->name('kart/dashboard');
     Route::get('/dashboard','DashboardController@index')->name('dashboard');
+
     Route::get('/dashboard/getorders','DashboardController@getOrders');    
     Route::get('/dashboard/getbuyer','DashboardController@getBuyer'); 
     Route::get('/dashboard/getseller','DashboardController@getSeller'); 
