@@ -22,9 +22,8 @@ Route::get('region', 'Settings\RegionController@index')->name('region');
 Route::get('email-verify/{token}', 'Auth\RegisterController@verifyUser')->name('email-verify');
 
 Route::group(['middleware' => ['guest'] ], function () {
-    Route::get('/','Admin\LoginController@create')
-        ->name('login');
-    Route::post('/','Admin\LoginController@login');
+    Route::view('/', 'kart/admin/login');
+
     Route::get('/forget-password','Admin\ForgetPasswordController@create')
         ->name('forget-password');
     Route::post('/forgetpassword','Admin\ForgetPasswordController@store');
@@ -36,7 +35,7 @@ Route::group(['middleware' => ['auth'] ], function () {
 });
 
 Route::group(['middleware'=>['auth','admin1'],'prefix'=>'admin','namespace'=>'Admin'],function(){
-    Route::get('/dashboard','DashboardController@index');
+    Route::get('/dashboard','DashboardController@index')->name('dashboard');
     Route::get('/dashboard/getorders','DashboardController@getOrders');    
     Route::get('/dashboard/getbuyer','DashboardController@getBuyer'); 
     Route::get('/dashboard/getseller','DashboardController@getSeller'); 

@@ -1,7 +1,7 @@
 <html>
 <head>
 
-    <link rel="stylesheet" href="{{ mix('css/tailwind.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/kart.css') }}">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="{{ url('js/canvasjs.min.js') }}"></script>
