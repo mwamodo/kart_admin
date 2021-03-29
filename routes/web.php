@@ -1,20 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
-// Route::group([
-//     'prefix' => 'auth',
-//     'middleware' => ['auth','user'],
-//    ], function () {
-//     Route::post('login', 'Auth\LoginController@action');
-//    });
-
-/*Route::get('/', function () {
-    return redirect('admin/');
-});
-*/
-
-// Auth::routes(['verify' => true]);
 
 Route::get('region', 'Settings\RegionController@index')->name('region');
 
@@ -22,16 +9,19 @@ Route::get('region', 'Settings\RegionController@index')->name('region');
 Route::get('email-verify/{token}', 'Auth\RegisterController@verifyUser')->name('email-verify');
 
 Route::group(['middleware' => ['guest'] ], function () {
-    Route::view('/', 'kart/admin/login');
+    Route::view('/', 'kart/admin/login')->name('login');
 
-    Route::get('/forget-password','Admin\ForgetPasswordController@create')
-        ->name('forget-password');
+    // TODO: forget-password process
+    Route::get('/forget-password','Admin\ForgetPasswordController@create')->name('forget-password');
     Route::post('/forgetpassword','Admin\ForgetPasswordController@store');
     Route::get('/forgetverify/{token}', 'Admin\ForgetPasswordController@verify');
 });
 
 Route::group(['middleware' => ['auth'] ], function () {
-   Route::get('logout', 'Admin\LoginController@logout');
+   Route::get('logout', function() {
+       Auth::logout();
+       return redirect()->route('login');
+   });
 });
 
 Route::group(['middleware'=>['auth','admin1'],'prefix'=>'admin','namespace'=>'Admin'],function(){
