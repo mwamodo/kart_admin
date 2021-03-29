@@ -5,12 +5,10 @@
                  alt="Kart">
         </div>
         <div class="flex-1 mt-6 w-full px-2 space-y-1">
-            <!-- Current: "bg-gray-800 text-white", Default: "group text-gray-100 hover:bg-gray-800 hover:text-white" -->
-            <a href="#"
-               class="bg-gray-800 text-white w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+            <a href="{{ route('dashboard') }}"
+               class="w-full p-3 rounded-md flex flex-col items-center text-xs font-medium {{ Request::is('admin/dashboard') ? 'bg-gray-800 text-white' : 'group text-gray-100 hover:bg-gray-800 hover:text-white' }}"
                aria-current="page">
-                <!-- Current: "text-white", Default: "text-gray-300 group-hover:text-white" -->
-                <x-icon.home class="h-6 w-6" />
+                <x-icon.home class="h-6 w-6 {{ Request::is('admin/dashboard') ? 'text-white' : 'text-gray-300 group-hover:text-white' }}" />
                 <span class="mt-2">Home</span>
             </a>
 
@@ -28,10 +26,10 @@
                 <span class="mt-2">Products</span>
             </a>
 
-            <a href="#"
-               class="group text-gray-100 hover:bg-gray-800 hover:text-white w-full p-3 rounded-md flex flex-col items-center text-xs font-medium"
+            <a href="{{ route('buyers') }}"
+               class="w-full p-3 rounded-md flex flex-col items-center text-xs font-medium {{ Request::is('admin/buyers') ? 'bg-gray-800 text-white' : 'group text-gray-100 hover:bg-gray-800 hover:text-white' }}"
                aria-current="page">
-                <x-icon.buyers class="text-gray-300 group-hover:text-white h-6 w-6" />
+                <x-icon.buyers class="text-gray-300 group-hover:text-white h-6 w-6 {{ Request::is('admin/buyers') ? 'text-white' : 'text-gray-300 group-hover:text-white' }}" />
                 <span class="mt-2">Buyers</span>
             </a>
 

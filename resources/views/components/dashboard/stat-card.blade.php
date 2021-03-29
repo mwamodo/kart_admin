@@ -2,7 +2,7 @@
     'title',
     'stat',
     'range',
-    'percentage'
+    'percentage',
 ])
 
 <div class="relative bg-white pt-5 px-4 pb-12 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
@@ -26,7 +26,7 @@
         </p>
         <div class="absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6">
             <div class="text-sm">
-                <a href="#" class="font-medium text-gray-600 hover:text-gray-500"> View all<span class="sr-only"> Total Subscribers stats</span></a>
+                {{ $link }}
             </div>
         </div>
     </dd>

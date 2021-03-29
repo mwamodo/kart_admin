@@ -16,14 +16,23 @@
     <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
         <x-dashboard.stat-card title="Total Orders" :stat="$orders" :range="$order_range" :percentage="$order_percentage">
             <x-icon.orders class="h-6 w-6 text-white" />
+            <x-slot name="link">
+                <a href="" class="font-medium text-gray-600 hover:text-gray-500">View all</a>
+            </x-slot>
         </x-dashboard.stat-card>
 
-        <x-dashboard.stat-card title="Total Customers" :stat="$buyers" :range="$buyer_range" :percentage="$buyer_percentage">
+        <x-dashboard.stat-card title="Total Customers" :stat="$buyers" :range="$buyer_range" :percentage="$buyer_percentage" :stat_route="route('buyers')">
             <x-icon.buyers class="h-6 w-6 text-white" />
+            <x-slot name="link">
+                <a href="{{ route('buyers') }}" class="font-medium text-gray-600 hover:text-gray-500">View all</a>
+            </x-slot>
         </x-dashboard.stat-card>
 
         <x-dashboard.stat-card title="Total Sellers" :stat="$sellers" :range="$seller_range" :percentage="$seller_percentage">
             <x-icon.buyers class="h-6 w-6 text-white" />
+            <x-slot name="link">
+                <a href="" class="font-medium text-gray-600 hover:text-gray-500">View all</a>
+            </x-slot>
         </x-dashboard.stat-card>
     </dl>
 </div>

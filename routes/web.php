@@ -29,52 +29,48 @@ Route::group(['middleware'=>['auth','admin1'], 'prefix'=>'admin', 'namespace'=>'
     Route::view('/dashboard/','kart/dashboard/index')->name('dashboard');
     Route::get('/old/dashboard','DashboardController@index')->name('old.dashboard');
 
+    // TODO: Routes get-orders, get-buyers, and ger-seller
     Route::get('/dashboard/getorders','DashboardController@getOrders');    
     Route::get('/dashboard/getbuyer','DashboardController@getBuyer'); 
     Route::get('/dashboard/getseller','DashboardController@getSeller'); 
 });
 
 Route::group(['middleware'=>['auth','admin1'],'prefix'=>'admin','namespace'=>'Admin\Buyer'],function() {
-  Route::get('/buyer/{id}/addresses', 'AddressController@index'); 
-  Route::get('/buyer/{userid}/address/{id}/edit', 'AddressController@edit'); 
-  Route::post('/buyer/{userid}/address/{id}/edit', 'AddressController@update');
-  Route::get('/buyer/address/{id}/delete', 'AddressController@destroy');
-  Route::post('/buyer/delete', 'BuyerController@destroy');
-  Route::get('/buyer/{id}/edit', 'BuyerController@edit'); 
-  Route::post('/buyer/{id}/edit', 'BuyerController@update'); 
-  
-  Route::post('/buyer/verify', 'BuyerController@verifyCode');
+    Route::view('/buyers', 'kart/buyers/index')->name('buyers');
+    Route::get('/old/buyer/', 'BuyerController@index')->name('old.buyers');
 
-  Route::get('/buyer', 'BuyerController@index'); 
-  Route::get('/buyer/add', 'BuyerController@create'); 
-  Route::post('/buyer/add', 'BuyerController@store');
-
-  Route::get('/buyer/{id}/getuser', 'BuyerController@getuser');
-  Route::get('/buyer/{id}/details', 'BuyerController@show');
-
-  // Route::get('/buyer/{id}/orders', 'BuyerController@orders');
-  // Route::get('/buyer/{id}/giftorders', 'BuyerController@giftorders');
-  Route::get('/buyer/{id}/orders', 'OrderController@orders');
-  // Route::get('/buyer/{id}/giftorders', 'OrderController@giftorders');
-  // Route::get('/buyer/{id}/del_order', 'BuyerController@delOrder');
-
-  Route::post('/buyer/reviews/update', 'ReviewController@reviewUpdate'); 
-  Route::get('/buyer/{id}/del_review', 'ReviewController@delReview');
-  Route::get('/buyer/{id}/getreview', 'ReviewController@getreview');
-  Route::get('/buyer/{id}/reviews', 'ReviewController@reviews');
-  
-  Route::get('/buyer/{id}/activities', 'BuyerController@activities');
-  Route::get('/buyer/{id}/loginhistory', 'BuyerController@loginhistory');
-  Route::post('/buyer/{id}/update', 'BuyerController@statusUpdate');
-  Route::get('/buyer/check', 'BuyerController@check');
-  Route::post('/buyer/resetpassword', 'ResetPasswordController@resetpassword');
-  Route::get('/buyer/{id}/sendmail', 'MailMessageController@create');
-  Route::post('/buyer/{id}/sendmail', 'MailMessageController@SendMail');
-
-  // Route::get('/buyer/{id}/reviews', 'BuyerController@reviews');
-  // Route::get('/buyer/{id}/getreview', 'BuyerController@getreview');
-  // Route::get('/buyer/{id}/del_review', 'BuyerController@delReview');
-  // Route::post('/buyer/reviews/update', 'BuyerController@reviewUpdate');
+    Route::get('/buyer/{id}/addresses', 'AddressController@index');
+    Route::get('/buyer/{userid}/address/{id}/edit', 'AddressController@edit');
+    Route::post('/buyer/{userid}/address/{id}/edit', 'AddressController@update');
+    Route::get('/buyer/address/{id}/delete', 'AddressController@destroy');
+    Route::post('/buyer/delete', 'BuyerController@destroy');
+    Route::get('/buyer/{id}/edit', 'BuyerController@edit');
+    Route::post('/buyer/{id}/edit', 'BuyerController@update');
+    Route::post('/buyer/verify', 'BuyerController@verifyCode');
+    Route::get('/buyer/add', 'BuyerController@create');
+    Route::post('/buyer/add', 'BuyerController@store');
+    Route::get('/buyer/{id}/getuser', 'BuyerController@getuser');
+    Route::get('/buyer/{id}/details', 'BuyerController@show');
+    // Route::get('/buyer/{id}/orders', 'BuyerController@orders');
+    // Route::get('/buyer/{id}/giftorders', 'BuyerController@giftorders');
+    Route::get('/buyer/{id}/orders', 'OrderController@orders');
+    // Route::get('/buyer/{id}/giftorders', 'OrderController@giftorders');
+    // Route::get('/buyer/{id}/del_order', 'BuyerController@delOrder');
+    Route::post('/buyer/reviews/update', 'ReviewController@reviewUpdate');
+    Route::get('/buyer/{id}/del_review', 'ReviewController@delReview');
+    Route::get('/buyer/{id}/getreview', 'ReviewController@getreview');
+    Route::get('/buyer/{id}/reviews', 'ReviewController@reviews');
+    Route::get('/buyer/{id}/activities', 'BuyerController@activities');
+    Route::get('/buyer/{id}/loginhistory', 'BuyerController@loginhistory');
+    Route::post('/buyer/{id}/update', 'BuyerController@statusUpdate');
+    Route::get('/buyer/check', 'BuyerController@check');
+    Route::post('/buyer/resetpassword', 'ResetPasswordController@resetpassword');
+    Route::get('/buyer/{id}/sendmail', 'MailMessageController@create');
+    Route::post('/buyer/{id}/sendmail', 'MailMessageController@SendMail');
+    // Route::get('/buyer/{id}/reviews', 'BuyerController@reviews');
+    // Route::get('/buyer/{id}/getreview', 'BuyerController@getreview');
+    // Route::get('/buyer/{id}/del_review', 'BuyerController@delReview');
+    // Route::post('/buyer/reviews/update', 'BuyerController@reviewUpdate');
 });
 
 Route::group(['middleware'=>['auth','admin1'],'prefix'=>'admin','namespace'=>'Admin'],function(){
@@ -195,6 +191,7 @@ Route::group(['middleware'=>['auth','admin1'],'prefix'=>'admin','namespace'=>'Ad
   Route::get('/store/{id}/delete', 'StoreController@destroy');
 
 });
+
 Route::group(['middleware'=>['auth','admin1'],'prefix'=>'admin','namespace'=>'Admin'],function(){
   // Route::get('/transaction/pending', 'TransactionController@pending');
   // Route::get('/transaction/approve', 'TransactionController@approve');
