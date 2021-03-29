@@ -4,10 +4,10 @@ namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
 
-class Login extends Component
+class LoginForm extends Component
 {
     public function render()
     {
-        return view('livewire.admin.login');
+        return view('livewire.admin.login-form');
     }
 }
