@@ -30,7 +30,7 @@
  		<img src="{{url($buyer->image)}}" class="w-8 h-8 rounded-full">
  
 		   		@else
-		   			<img src="{{url('/profile/default.png')}}" class="w-8 h-8 rounded-full">
+		   			<img src="{{url('/images/default.png')}}" class="w-8 h-8 rounded-full">
 		   		@endif
 
 		   	</div>
