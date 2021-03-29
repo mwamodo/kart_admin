@@ -26,8 +26,8 @@ Route::group(['middleware' => ['auth'] ], function () {
 });
 
 Route::group(['middleware'=>['auth','admin1'], 'prefix'=>'admin', 'namespace'=>'Admin'],function(){
-    Route::view('kart/dashboard/','kart/dashboard/index')->name('kart/dashboard');
-    Route::get('/dashboard','DashboardController@index')->name('dashboard');
+    Route::view('/dashboard/','kart/dashboard/index')->name('dashboard');
+    Route::get('/old/dashboard','DashboardController@index')->name('old.dashboard');
 
     Route::get('/dashboard/getorders','DashboardController@getOrders');    
     Route::get('/dashboard/getbuyer','DashboardController@getBuyer'); 
