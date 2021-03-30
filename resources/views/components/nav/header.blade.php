@@ -1,7 +1,7 @@
 <header class="w-full">
-    <div class="relative z-10 flex-shrink-0 h-16 bg-white border-b border-gray-200 shadow-sm flex">
+    <div class="relative z-10 flex-shrink-0 h-16 bg-white border-b border-blue-200 shadow-sm flex">
         <button @click.stop="sidebarOpen = true"
-                class="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500 md:hidden">
+                class="border-r border-blue-200 px-4 text-blue-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 md:hidden">
             <span class="sr-only">Open sidebar</span>
             <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                  stroke="currentColor" aria-hidden="true">
@@ -13,7 +13,7 @@
             <div class="flex-1 flex">
                 <form class="w-full flex md:ml-0" action="#" method="GET">
                     <label for="search_field" class="sr-only">Search all files</label>
-                    <div class="relative w-full text-gray-400 focus-within:text-gray-600">
+                    <div class="relative w-full text-blue-400 focus-within:text-blue-600">
                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center">
                             <svg class="flex-shrink-0 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                  fill="currentColor" aria-hidden="true">
@@ -34,7 +34,7 @@
                      @click.away="open = false" class="relative flex-shrink-0">
                     <div>
                         <button type="button"
-                                class="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                                class="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                                 id="user-menu" @click="open = !open" aria-haspopup="true"
                                 x-bind:aria-expanded="open">
                             <span class="sr-only">Open user menu</span>
@@ -52,8 +52,7 @@
                          x-transition:leave-start="transform opacity-100 scale-100"
                          x-transition:leave-end="transform opacity-0 scale-95"
                          class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                         role="menu" aria-orientation="vertical" aria-labelledby="user-menu"
-                         style="display: none;">
+                         role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
 
                         <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                            role="menuitem">Your profile</a>
@@ -66,7 +65,7 @@
                 </div>
 
                 <button type="button"
-                        class="flex bg-gray-600 p-1 rounded-full items-center justify-center text-white hover:bg-gray-700 focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                        class="flex bg-blue-600 p-1 rounded-full items-center justify-center text-white hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                     <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                          stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
