@@ -18,14 +18,9 @@
                 <div class="flex-1 flex items-stretch overflow-hidden">
                     <main class="flex-1 overflow-y-auto">
                         <!-- Primary column -->
-                        <section aria-labelledby="primary-heading"
-                                 class="min-w-0 flex-1 h-full flex flex-col overflow-hidden lg:order-last">
-                            <div class="h-full">
-                                <div class="p-6 h-full">
-                                    @yield('main')
-                                </div>
-                            </div>
-                        </section>
+                        <div class="pt-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            @yield('main')
+                        </div>
                     </main>
 
                     <!-- Secondary column (hidden on smaller screens) -->

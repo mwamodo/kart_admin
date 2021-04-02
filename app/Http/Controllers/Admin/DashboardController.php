@@ -39,7 +39,6 @@ class DashboardController extends Controller
 
         $sellerid = Product::where('ratings', 5)->pluck('user_id')->toArray();
 
-
         // get top buyer depend by max of order items
 
         $topBuyers = [];
@@ -49,9 +48,7 @@ class DashboardController extends Controller
             $topBuyers = User::where('usergroup_id', 4)->whereIn('id', $buyersid)->take(10)->get();
         }
 
-
         // $buyersid=OrderItem::groupby('buyer_id')->pluck('buyer_id')->toArray();
-
 
         // $buyerscount=User::whereIn('id',$buyersid)->get()->map(function($user){
         //   return [
@@ -60,7 +57,6 @@ class DashboardController extends Controller
         //   ];
         // });
 
-
         // $sortdesc=$buyerscount->sortByDesc(function ($buyerscount, $key) {
         //       return $buyerscount['count'];
         // });
@@ -68,7 +64,6 @@ class DashboardController extends Controller
         // $userid=$sortdesc->take(10)->pluck('id');
 
         // $topBuyers=User::where('usergroup_id',4)->whereIn('id',$userid)->get();
-
 
         $topSellers = User::where('usergroup_id', 3)->whereIn('id', $sellerid)->limit(10)->get();
 
@@ -92,10 +87,8 @@ class DashboardController extends Controller
         // dd($request->duration);
         $duration = $request->duration == null ? '30' : $request->duration;
 
-
         $lastdate = Carbon::today()->subDays($duration)->toDateString();
         $previousdate = Carbon::today()->subDays($duration * 2)->toDateString();
-
 
         $lastOrders = Order::where('created_at', '>=', $lastdate)->count();
         $previousOrders = Order::whereBetween('created_at', [$previousdate, $lastdate])->count();
@@ -108,9 +101,7 @@ class DashboardController extends Controller
             $result = $previousOrders == 0 ? $lastOrders * 100 : $previousOrders * 100;
         }
 
-
         $range = $result >= 100 ? 'high' : 'low';
-
 
         return [
             'orders' => $lastOrders,
@@ -164,7 +155,6 @@ class DashboardController extends Controller
         } else {
             $result = $previousSeller == 0 ? $lastSeller * 100 : $previousOrders * 100;
         }
-
 
         $range = $result > 100 ? 'high' : 'low';
 

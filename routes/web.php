@@ -25,14 +25,14 @@ Route::group(['middleware' => ['auth'] ], function () {
    })->name('logout');
 });
 
-Route::group(['middleware'=>['auth','admin1'], 'prefix'=>'admin', 'namespace'=>'Admin'],function(){
+Route::group(['middleware'=>['auth','admin1'], 'prefix'=>'admin', 'namespace'=>'Admin'], function(){
     Route::view('/dashboard/','kart/dashboard/index')->name('dashboard');
     Route::get('/old/dashboard','DashboardController@index')->name('old.dashboard');
 
-    // TODO: Routes get-orders, get-buyers, and ger-seller
-    Route::get('/dashboard/getorders','DashboardController@getOrders');    
-    Route::get('/dashboard/getbuyer','DashboardController@getBuyer'); 
-    Route::get('/dashboard/getseller','DashboardController@getSeller'); 
+    // Routes get-orders, get-buyers, and get-seller: return json for the old dashboard counter
+    Route::get('/dashboard/getorders','DashboardController@getOrders');
+    Route::get('/dashboard/getbuyer','DashboardController@getBuyer');
+    Route::get('/dashboard/getseller','DashboardController@getSeller');
 });
 
 Route::group(['middleware'=>['auth','admin1'],'prefix'=>'admin','namespace'=>'Admin\Buyer'],function() {
